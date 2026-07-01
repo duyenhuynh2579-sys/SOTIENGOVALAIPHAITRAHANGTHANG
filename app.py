@@ -5,8 +5,8 @@ st.image("logo.jpg.jpg", width=200)
 # Cấu hình trang ứng dụng
 st.set_page_config(page_title="Công Cụ Tính Khoản Vay Công Ty", layout="wide")
 
-st.title("📊 ỨNG DỤNG TÍNH TOÁN KHOẢN VAY CHI TIẾT")
-st.write("Đơn giản - Dễ hiểu - Hiệu quả")
+st.title("📊 ĐỀ TÀI 02: TÍNH SỐ TIỀN GỐC VÀ LÃI PHẢI TRẢ HÀNG THÁNG KHI VAY VỐN NGÂN HÀNG")
+st.write("")
 st.markdown("---")
 
 # ==========================================
@@ -16,7 +16,7 @@ st.sidebar.header("📂 Thông tin khoản vay")
 
 # Nhập các thông tin cơ bản dựa theo cấu trúc file tài liệu
 muc_dich = st.sidebar.selectbox("Mục đích vay", ["Mua ô tô", "Mua nhà", "Kinh doanh", "Tiêu dùng"])
-san_pham = st.sidebar.selectbox("Sản phẩm vay", ["Vay thế chấp", "Vay tín chấp", "Vay mua nhà"])
+san_pham = st.sidebar.selectbox("Loại  vay", ["Vay thế chấp", "Vay tín chấp"])
 
 P = st.sidebar.number_input("Số tiền vay (P) - VNĐ", min_value=1000000, value=300000000, step=10000000)
 n = st.sidebar.number_input("Thời hạn vay (n) - Tháng", min_value=1, value=36, step=1)
@@ -104,7 +104,7 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.info(f"**🎯 Mục đích:** {muc_dich}")
 with col2:
-    st.info(f"**📦 Sản phẩm:** {san_pham}")
+    st.info(f"**Loại hình:** {san_pham}")
 with col3:
     st.info(f"**🛠️ Phương thức:** {phuong_thuc}")
 
