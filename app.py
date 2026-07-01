@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+st.image("logo.jpg.jpg", width=200)
 
 # Cấu hình trang ứng dụng
 st.set_page_config(page_title="Công Cụ Tính Khoản Vay Công Ty", layout="wide")
