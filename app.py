@@ -126,7 +126,12 @@ st.markdown("---")
 # Biểu đồ trực quan hóa xu hướng trả nợ hàng tháng
 st.subheader("📈 Biểu đồ xu hướng thanh toán")
 chart_data = df_lich_trinh[["Kỳ trả nợ (Tháng)", "Gốc phải trả (VNĐ)", "Lãi phải trả (VNĐ)"]]
-st.area_chart(chart_data.set_index("Kỳ trả nợ (Tháng)"))
+
+# Truyền danh sách mã màu vào tham số color: Đỏ (#FF0000) và Xanh dương (#0000FF)
+st.area_chart(
+    chart_data.set_index("Kỳ trả nợ (Tháng)"),
+    color=["#FF0000", "#0000FF"]
+)
 
 # Bảng lịch trình thanh toán chi tiết từng tháng
 st.subheader("📋 Lịch trình trả nợ chi tiết qua từng kỳ")
