@@ -14,19 +14,6 @@ st.markdown("---")
 # ==========================================
 st.sidebar.header("📂 Thông tin khoản vay")
 
-# Nhập các thông tin cơ bản dựa theo cấu trúc file tài liệu
-muc_dich = st.sidebar.selectbox("Mục đích vay", ["Mua ô tô", "Mua nhà", "Kinh doanh", "Tiêu dùng"])
-san_pham = st.sidebar.selectbox("Loại  vay", ["Vay thế chấp", "Vay tín chấp"])
-
-P = st.sidebar.number_input("Số tiền vay (P) - VNĐ", min_value=1000000, value=300000000, step=10000000)
-n = st.sidebar.number_input("Thời hạn vay (n) - Tháng", min_value=1, value=36, step=1)
-r_nam = st.sidebar.number_input("Lãi suất (%/năm)", min_value=0.0, value=10.0, step=0.1)
-
-phuong_thuc = st.sidebar.radio(
-    "Phương thức trả nợ",
-    ["Trả góp cố định (Annuity)", "Dư nợ giảm dần"]
-)
-
 # Cho khách hàng chọn số tiền muốn vay trước
 P = st.sidebar.number_input("Số tiền vay (VNĐ)", min_value=10000000, value=300000000, step=10000000)
 
@@ -43,6 +30,20 @@ else:
 
 # Hiển thị thanh trượt chọn số tháng động dựa trên kết quả tính toán ở trên
 n = st.sidebar.slider("Thời hạn vay (Tháng)", min_value=6, max_value=max_months, value=default_months, step=6)
+
+# Nhập các thông tin cơ bản dựa theo cấu trúc file tài liệu
+muc_dich = st.sidebar.selectbox("Mục đích vay", ["Mua ô tô", "Mua nhà", "Kinh doanh", "Tiêu dùng"])
+san_pham = st.sidebar.selectbox("Loại  vay", ["Vay thế chấp", "Vay tín chấp"])
+
+P = st.sidebar.number_input("Số tiền vay (P) - VNĐ", min_value=1000000, value=300000000, step=10000000)
+n = st.sidebar.number_input("Thời hạn vay (n) - Tháng", min_value=1, value=36, step=1)
+r_nam = st.sidebar.number_input("Lãi suất (%/năm)", min_value=0.0, value=10.0, step=0.1)
+
+phuong_thuc = st.sidebar.radio(
+    "Phương thức trả nợ",
+    ["Trả góp cố định (Annuity)", "Dư nợ giảm dần"]
+)
+
 # Đổi lãi suất năm thành lãi suất tháng (dạng thập phân)
 r = (r_nam / 100) / 12
 
