@@ -127,12 +127,11 @@ st.markdown("---")
 st.subheader("📈 Biểu đồ xu hướng thanh toán")
 chart_data = df_lich_trinh[["Kỳ trả nợ (Tháng)", "Gốc phải trả (VNĐ)", "Lãi phải trả (VNĐ)"]]
 
-# Truyền danh sách mã màu vào tham số color: Đỏ (#FF0000) và Xanh dương (#0000FF)
+# Sử dụng màu Đỏ Nhạt (#E57373) và Xanh Dương Nhạt (#64B5F6)
 st.area_chart(
     chart_data.set_index("Kỳ trả nợ (Tháng)"),
-    color=["#FF0000", "#0000FF"]
+    color=["#E57373", "#64B5F6"]
 )
-
 # Bảng lịch trình thanh toán chi tiết từng tháng
 st.subheader("📋 Lịch trình trả nợ chi tiết qua từng kỳ")
 st.dataframe(df_lich_trinh.style.format({
