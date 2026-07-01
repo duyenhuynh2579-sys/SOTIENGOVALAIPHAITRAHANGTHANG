@@ -51,25 +51,24 @@ phuong_thuc = st.sidebar.radio(
 r = (r_nam / 100) / 12
 
 # ==========================================
-# 2. LOGIC TÍNH TOÁN (BACKEND)
+# 2. LOGIC TÍNH TOÁN (BACKEND) - ĐÃ SỬA LỖI DƯ NỢ CUỐI KỲ
 # ==========================================
 lich_trinh = []
+du_no_goc = P  # Khởi tạo dư nợ đầu kỳ của tháng thứ nhất bằng toàn bộ số vốn vay
 
 if phuong_thuc == "Trả góp cố định (Annuity)":
-    # Tính số tiền trả cố định hàng tháng (E)
+    # Công thức tính số tiền trả cố định hàng tháng (E)
     if r > 0:
         E = P * (r * (1 + r)**n) / ((1 + r)**n - 1)
     else:
         E = P / n
         
-    du_no_goc = P
-    tong_lai_ky_han = 0
-    
     for i in range(1, n + 1):
         tien_lai = du_no_goc * r
         tien_goc = E - tien_lai
+        
+        # CHUẨN XÁC: Tính toán dư nợ cuối kỳ của tháng hiện tại trước khi lưu dữ liệu
         du_no_cuoi = du_no_goc - tien_goc
-        tong_lai_ky_han += tien_lai
         
         lich_trinh.append({
             "Kỳ trả nợ (Tháng)": i,
@@ -79,23 +78,24 @@ if phuong_thuc == "Trả góp cố định (Annuity)":
             "Tổng trả hàng tháng (VNĐ)": round(E),
             "Dư nợ cuối kỳ (VNĐ)": round(max(0, du_no_cuoi))
         })
+        # CHUẨN XÁC: Gán dư nợ cuối kỳ này thành dư nợ đầu kỳ cho vòng lặp kế tiếp
         du_no_goc = du_no_cuoi
         
     goc_thang_dau = lich_trinh[0]["Gốc phải trả (VNĐ)"]
     lai_thang_dau = lich_trinh[0]["Lãi phải trả (VNĐ)"]
     tong_thang_dau = lich_trinh[0]["Tổng trả hàng tháng (VNĐ)"]
+    tong_lai_ky_han = sum(item["Lãi phải trả (VNĐ)"] for item in lich_trinh)
     tong_phai_tra = P + tong_lai_ky_han
 
 else:  # Dư nợ giảm dần
     goc_hang_thang = P / n
-    du_no_goc = P
-    tong_lai_ky_han = 0
     
     for i in range(1, n + 1):
         tien_lai = du_no_goc * r
         tong_hang_thang = goc_hang_thang + tien_lai
+        
+        # CHUẨN XÁC: Tính toán dư nợ cuối kỳ của tháng hiện tại trước khi lưu dữ liệu
         du_no_cuoi = du_no_goc - goc_hang_thang
-        tong_lai_ky_han += tien_lai
         
         lich_trinh.append({
             "Kỳ trả nợ (Tháng)": i,
@@ -105,14 +105,16 @@ else:  # Dư nợ giảm dần
             "Tổng trả hàng tháng (VNĐ)": round(tong_hang_thang),
             "Dư nợ cuối kỳ (VNĐ)": round(max(0, du_no_cuoi))
         })
+        # CHUẨN XÁC: Gán dư nợ cuối kỳ này thành dư nợ đầu kỳ cho vòng lặp kế tiếp
         du_no_goc = du_no_cuoi
 
     goc_thang_dau = lich_trinh[0]["Gốc phải trả (VNĐ)"]
     lai_thang_dau = lich_trinh[0]["Lãi phải trả (VNĐ)"]
     tong_thang_dau = lich_trinh[0]["Tổng trả hàng tháng (VNĐ)"]
+    tong_lai_ky_han = sum(item["Lãi phải trả (VNĐ)"] for item in lich_trinh)
     tong_phai_tra = P + tong_lai_ky_han
 
-# Chuyển đổi lịch trình thành DataFrame để hiển thị trên UI
+# Chuyển đổi mảng dữ liệu thành DataFrame để vẽ giao diện
 df_lich_trinh = pd.DataFrame(lich_trinh)
 
 # ==========================================
