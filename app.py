@@ -3,7 +3,7 @@ import pandas as pd
 st.image("logo.jpg.jpg", width=200)
 
 # Cấu hình trang ứng dụng
-st.set_page_config(page_title="Công Cụ Tính Khoản Vay Công Ty", layout="wide")
+st.set_page_config(page_title="TÍNH SỐ TIỀN GỐC VÀ LÃI PHẢI TRẢ HÀNG THÁNG KHI VAY VỐN NGÂN HÀNG", layout="wide")
 
 st.title("📊 ĐỀ TÀI 02: TÍNH SỐ TIỀN GỐC VÀ LÃI PHẢI TRẢ HÀNG THÁNG KHI VAY VỐN NGÂN HÀNG")
 st.write("")
