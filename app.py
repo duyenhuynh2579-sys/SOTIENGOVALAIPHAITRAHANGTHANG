@@ -14,29 +14,32 @@ st.markdown("---")
 # ==========================================
 st.sidebar.header("📂 Thông tin khoản vay")
 
-# Cho khách hàng chọn số tiền muốn vay trước
-P = st.sidebar.number_input("Số tiền vay (VNĐ)", min_value=10000000, value=300000000, step=10000000)
-
-# Xác định số tháng tối đa dựa trên số tiền và gói vay bằng câu lệnh điều kiện (IF)
-if "Nhà" in goi_vay:
-    max_months = 300  # Vay mua nhà tối đa 25 năm
-    default_months = 120
-elif "Ô tô" in goi_vay or P >= 300000000:
-    max_months = 96   # Vay mua xe hoặc vay lớn tối đa 8 năm
-    default_months = 36
-else:
-    max_months = 36   # Khoản vay nhỏ tiêu dùng tối đa 3 năm
-    default_months = 12
-
-# Hiển thị thanh trượt chọn số tháng động dựa trên kết quả tính toán ở trên
-n = st.sidebar.slider("Thời hạn vay (Tháng)", min_value=6, max_value=max_months, value=default_months, step=6)
-
-# Nhập các thông tin cơ bản dựa theo cấu trúc file tài liệu
+# Bước 1: Nhập các thông tin cơ bản trước (Mục đích, Loại vay, Số tiền)
 muc_dich = st.sidebar.selectbox("Mục đích vay", ["Mua ô tô", "Mua nhà", "Kinh doanh", "Tiêu dùng"])
-san_pham = st.sidebar.selectbox("Loại  vay", ["Vay thế chấp", "Vay tín chấp"])
-
+san_pham = st.sidebar.selectbox("Loại vay", ["Vay thế chấp", "Vay tín chấp"])
 P = st.sidebar.number_input("Số tiền vay (P) - VNĐ", min_value=1000000, value=300000000, step=10000000)
-n = st.sidebar.number_input("Thời hạn vay (n) - Tháng", min_value=1, value=36, step=1)
+
+# Bước 2: Logic tự động tính toán giới hạn số tháng dựa trên Mục đích và Số tiền vay
+if muc_dich == "Mua nhà":
+    max_months = 300      # Mua nhà tối đa 25 năm (300 tháng)
+    default_months = 120  # Mặc định gợi ý 10 năm
+elif muc_dich == "Mua ô tô" or P >= 300000000:
+    max_months = 96       # Mua xe hoặc khoản vay lớn tối đa 8 năm (96 tháng)
+    default_months = 36   # Mặc định gợi ý 3 năm như tài liệu công ty
+else:
+    max_months = 60       # Các khoản vay kinh doanh/tiêu dùng nhỏ tối đa 5 năm (60 tháng)
+    default_months = 12   # Mặc định gợi ý 1 năm
+
+# Bước 3: Hiển thị thanh trượt chọn số tháng ĐỘNG (Thay thế hoàn toàn ô nhập số cũ)
+n = st.sidebar.slider(
+    "Thời hạn vay (n) - Tháng", 
+    min_value=6, 
+    max_value=max_months, 
+    value=default_months, 
+    step=6
+)
+
+# Bước 4: Nhập Lãi suất và Phương thức trả nợ
 r_nam = st.sidebar.number_input("Lãi suất (%/năm)", min_value=0.0, value=10.0, step=0.1)
 
 phuong_thuc = st.sidebar.radio(
