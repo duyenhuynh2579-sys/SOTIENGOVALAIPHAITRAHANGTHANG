@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+
 st.image("logo.jpg.jpg", width=200)
 
 # Cấu hình trang ứng dụng
@@ -148,17 +149,18 @@ st.markdown("---")
 # Biểu đồ trực quan hóa xu hướng trả nợ hàng tháng
 st.subheader("📈 Biểu đồ xu hướng thanh toán")
 
-# Chuẩn hóa dữ liệu: Đặt tháng làm trục X và chọn cột tiền Gốc, tiền Lãi
+# Đặt tháng làm trục X và chọn 2 khoảng tiền cần vẽ cột
 chart_data = df_lich_trinh.set_index("Kỳ trả nợ (Tháng)")[["Gốc phải trả (VNĐ)", "Lãi phải trả (VNĐ)"]]
 
-# Hiển thị biểu đồ cột nhóm song song trực quan
-st.bar_chart(chart_data, stack=False)
+# Hiển thị biểu đồ cột (Streamlit sẽ tự động chia cột Gốc và Lãi)
+st.bar_chart(chart_data)
 
 # Sử dụng màu Đỏ Nhạt (#E57373) và Xanh Dương Nhạt (#64B5F6)
 st.area_chart(
     chart_data.set_index("Kỳ trả nợ (Tháng)"),
     color=["#E57373", "#64B5F6"]
 )
+
 # Bảng lịch trình thanh toán chi tiết từng tháng
 st.subheader("📋 Lịch trình trả nợ chi tiết qua từng kỳ")
 st.dataframe(df_lich_trinh.style.format({
