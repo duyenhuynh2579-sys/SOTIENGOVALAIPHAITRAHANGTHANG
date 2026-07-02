@@ -149,12 +149,12 @@ st.markdown("---")
 # Biểu đồ xu hướng thanh toán: Đã tối ưu đảo thứ tự hiển thị để biểu đồ dốc xuống chính xác trực quan
 st.subheader("📈 Biểu đồ xu hướng thanh toán")
 chart_data = df_lich_trinh[["Kỳ trả nợ (Tháng)", "Lãi phải trả (VNĐ)", "Gốc phải trả (VNĐ)"]]
+
 st.area_chart(
     chart_data.set_index("Kỳ trả nợ (Tháng)"),
-    color=["#64B5F6", "#E57373"],  # Màu xanh dịu cho Lãi và đỏ pastel nhẹ cho Gốc
+    color=["#E57373", "#64B5F6"],  # #E57373 (Đỏ pastel) cho Lãi và #64B5F6 (Xanh dương nhạt) cho Gốc
     y_label="Số tiền (VNĐ)"         # Thay thế chữ 'value' mặc định thành Tiếng Việt rõ ràng
 )
-
 # Bảng lịch trình thanh toán chi tiết từng tháng
 st.subheader("📋 Lịch trình trả nợ chi tiết qua từng kỳ")
 st.dataframe(df_lich_trinh.style.format({
