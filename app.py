@@ -148,12 +148,8 @@ st.markdown("---")
 
 # Biểu đồ trực quan hóa xu hướng trả nợ hàng tháng
 st.subheader("📈 Biểu đồ xu hướng thanh toán")
-
-# Đặt tháng làm trục X và chọn 2 khoảng tiền cần vẽ cột
 chart_data = df_lich_trinh.set_index("Kỳ trả nợ (Tháng)")[["Gốc phải trả (VNĐ)", "Lãi phải trả (VNĐ)"]]
-
-# Hiển thị biểu đồ cột (Streamlit sẽ tự động chia cột Gốc và Lãi)
-st.bar_chart(chart_data)
+st.bar_chart(chart_data, stack=False)
 
 # Sử dụng màu Đỏ Nhạt (#E57373) và Xanh Dương Nhạt (#64B5F6)
 st.area_chart(
