@@ -147,7 +147,12 @@ st.markdown("---")
 
 # Biểu đồ trực quan hóa xu hướng trả nợ hàng tháng
 st.subheader("📈 Biểu đồ xu hướng thanh toán")
-chart_data = df_lich_trinh[["Kỳ trả nợ (Tháng)", "Gốc phải trả (VNĐ)", "Lãi phải trả (VNĐ)"]]
+
+# Chuẩn hóa dữ liệu: Đặt tháng làm trục X và chọn cột tiền Gốc, tiền Lãi
+chart_data = df_lich_trinh.set_index("Kỳ trả nợ (Tháng)")[["Gốc phải trả (VNĐ)", "Lãi phải trả (VNĐ)"]]
+
+# Hiển thị biểu đồ cột nhóm song song trực quan
+st.bar_chart(chart_data, stack=False)
 
 # Sử dụng màu Đỏ Nhạt (#E57373) và Xanh Dương Nhạt (#64B5F6)
 st.area_chart(
