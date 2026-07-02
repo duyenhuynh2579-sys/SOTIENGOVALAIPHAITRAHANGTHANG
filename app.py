@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-st.image("logos.jpg", width=200)
+st.image("logos.jpg", width=300)
 
 # Cấu hình trang ứng dụng
 st.set_page_config(page_title="ĐỀ TÀI 02: TÍNH SỐ TIỀN GỐC VÀ LÃI PHẢI TRẢ HÀNG THÁNG KHI VAY VỐN NGÂN HÀNG", layout="wide")
