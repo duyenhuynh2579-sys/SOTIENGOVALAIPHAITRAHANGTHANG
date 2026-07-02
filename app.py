@@ -146,15 +146,13 @@ m6.metric(label="Tổng tiền phải trả (Gốc + Lãi)", value=f"{tong_phai_
 
 st.markdown("---")
 
-# Biểu đồ trực quan hóa xu hướng trả nợ hàng tháng
+# Biểu đồ xu hướng thanh toán: Đã tối ưu đảo thứ tự hiển thị để biểu đồ dốc xuống chính xác trực quan
 st.subheader("📈 Biểu đồ xu hướng thanh toán")
-chart_data = df_lich_trinh.set_index("Kỳ trả nợ (Tháng)")[["Gốc phải trả (VNĐ)", "Lãi phải trả (VNĐ)"]]
-
-
-# Sử dụng màu Đỏ Nhạt (#E57373) và Xanh Dương Nhạt (#64B5F6)
+chart_data = df_lich_trinh[["Kỳ trả nợ (Tháng)", "Lãi phải trả (VNĐ)", "Gốc phải trả (VNĐ)"]]
 st.area_chart(
     chart_data.set_index("Kỳ trả nợ (Tháng)"),
-    color=["#E57373", "#64B5F6"]
+    color=["#64B5F6", "#E57373"],  # Màu xanh dịu cho Lãi và đỏ pastel nhẹ cho Gốc
+    y_label="Số tiền (VNĐ)"         # Thay thế chữ 'value' mặc định thành Tiếng Việt rõ ràng
 )
 
 # Bảng lịch trình thanh toán chi tiết từng tháng
